@@ -1,8 +1,17 @@
 <template>
     <v-container fill-height>
-        <v-layout>
+        <v-layout
+            justify-center
+            align-center
+        >
 
-            <v-flex><!-- Elevation gera sombreado-->
+            <v-flex 
+                xs12 
+                sm6 
+                md4 
+                lg8
+                x13
+            ><!-- Elevation gera sombreado-->
                 <v-card class="elevation-12">
                     <v-toolbar color="primary" dark>
                        <v-toolbar-title>Login</v-toolbar-title>
