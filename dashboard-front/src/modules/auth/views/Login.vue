@@ -24,6 +24,8 @@
                                 name="email"
                                 label="Email"
                                 type="email"
+                                :success="!$v.user.email.$invalid"
+                                :error-messages="emailErrors"
                                 v-model.trim="$v.user.email.$model"
                             ></v-text-field>
                              <v-text-field 
@@ -31,6 +33,8 @@
                                 name="password"
                                 label="Senha"
                                 type="password"
+                                :success="!$v.user.password.$invalid"
+                                :error-messages="passwordErrors"
                                 v-model.trim="$v.user.password.$model"
                             ></v-text-field>
                             <v-btn 
@@ -78,6 +82,29 @@ export default {
                 required,
                 minLength: minLength(4)
             }
+        }
+    },
+    computed: {
+        emailErrors () {
+            const errors = []
+            const email = this.$v.user.email
+            if(!email.$dirty) { return errors }
+            // Não precisa de IF
+            !email.required && errors.push('Email é obrigatorio!')
+            !email.email && errors.push('Este email não é valido!')
+
+            return errors
+        },
+
+        passwordErrors () {
+            const errors = []
+            const password = this.$v.user.password
+            if(!password.$dirty) { return errors }
+            // Não precisa de IF
+            !password.required && errors.push('Senha é obrigatorio!')
+            !password.minLength && errors.push(`A senha deve ser maior que ${password.$params.minLength.min}`)
+
+            return errors
         }
     },
     methods: {
